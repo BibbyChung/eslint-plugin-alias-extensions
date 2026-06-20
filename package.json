@@ -1,6 +1,6 @@
 {
   "name": "@dev-bb/eslint-plugin-alias-extensions",
-  "version": "0.1.9",
+  "version": "0.2.0",
   "description": "ESLint plugin to enforce file extensions for alias imports",
   "type": "module",
   "sideEffects": false,

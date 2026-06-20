@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-06-20
+
 ### ⚠️ BREAKING CHANGES
 
 - **Rule renamed:** `require-src-extension` → `require-alias-extension`. The rule has been renamed to better reflect that it works with any alias (not limited to `#src`). Update your ESLint config to use `alias-extensions/require-alias-extension` instead of `alias-extensions/require-src-extension`.
@@ -143,7 +145,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Configurable `extensions` option for defining which file extensions to check (defaults to `.tsx`, `.ts`, `.jsx`, `.js`).
 - Recommended flat config (`aliasExtensions.configs.recommended`) that registers the plugin and enables the rule with `error` severity.
 
-[Unreleased]: https://github.com/BibbyChung/eslint-plugin-alias-extensions/compare/v0.1.9...main
+[Unreleased]: https://github.com/BibbyChung/eslint-plugin-alias-extensions/compare/v0.2.0...main
+[0.2.0]: https://github.com/BibbyChung/eslint-plugin-alias-extensions/compare/v0.1.9...v0.2.0
 [0.1.9]: https://github.com/BibbyChung/eslint-plugin-alias-extensions/compare/v0.1.8...v0.1.9
 [0.1.8]: https://github.com/BibbyChung/eslint-plugin-alias-extensions/compare/v0.1.7...v0.1.8
 [0.1.7]: https://github.com/BibbyChung/eslint-plugin-alias-extensions/compare/v0.1.6...v0.1.7
