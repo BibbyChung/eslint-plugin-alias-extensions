@@ -57,7 +57,7 @@ export default [
   ...aliasExtensions.configs.recommended,
   {
     rules: {
-      'alias-extensions/require-src-extension': [
+      'alias-extensions/require-alias-extension': [
         'error',
         {
           mappings: [{ alias: '#src', target: 'src' }],
@@ -90,7 +90,7 @@ export default [
 ]
 ```
 
-> **Important:** The recommended config enables the rule but does **not** provide any `mappings`. Since `mappings` defaults to `[]`, the rule will not flag any imports until you configure at least one mapping. You **must** add a separate config object that sets the `require-src-extension` options with your project's aliases.
+> **Important:** The recommended config enables the rule but does **not** provide any `mappings`. Since `mappings` defaults to `[]`, the rule will not flag any imports until you configure at least one mapping. You **must** add a separate config object that sets the `require-alias-extension` options with your project's aliases.
 
 A complete working setup:
 
@@ -101,7 +101,7 @@ export default [
   ...aliasExtensions.configs.recommended,
   {
     rules: {
-      'alias-extensions/require-src-extension': [
+      'alias-extensions/require-alias-extension': [
         'error',
         {
           mappings: [{ alias: '#src', target: 'src' }],
@@ -125,7 +125,7 @@ export default [
       'alias-extensions': aliasExtensions,
     },
     rules: {
-      'alias-extensions/require-src-extension': [
+      'alias-extensions/require-alias-extension': [
         'error',
         {
           projectRoot: process.cwd(),
@@ -157,13 +157,13 @@ export default [
 
 | Name | Description | Recommended | 🔧 |
 |---|---|---|---|
-| [`require-src-extension`](#configuration) | Require file extensions on alias imports (e.g. `#src/*`) | ✅ | 🔧 |
+| [`require-alias-extension`](#configuration) | Require file extensions on alias imports (e.g. `#src/*`) | ✅ | 🔧 |
 
 ---
 
 ## How It Works
 
-The `require-src-extension` rule inspects every `ImportDeclaration`, `ExportNamedDeclaration`, `ExportAllDeclaration`, and `ImportExpression` (dynamic `import()`) node in your source files.
+The `require-alias-extension` rule inspects every `ImportDeclaration`, `ExportNamedDeclaration`, `ExportAllDeclaration`, and `ImportExpression` (dynamic `import()`) node in your source files.
 
 1. **Matching phase** — only import paths that match one of your configured aliases (e.g. `#src/*`) are checked. Relative imports (`./foo`), absolute imports (`/foo`), and bare specifiers (`lodash`) are ignored. For dynamic `import()` expressions, only **literal** sources (e.g. `import('#src/foo')`) are checked; variable or template-literal sources (e.g. `import(someVar)`, `` import(`#src/${x}`) ``) are skipped since the path cannot be determined statically.
 2. **Skip phase** — if the import path already ends with one of the configured `extensions`, it is skipped (no false positive).

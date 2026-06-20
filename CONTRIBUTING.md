@@ -58,10 +58,10 @@ This document provides guidelines and instructions for setting up the project lo
 src/
 ├── index.ts                  # Plugin entry — registers rules & configs
 └── rules/
-    └── require-src-extension.ts   # The single rule implementation
+    └── require-alias-extension.ts   # The single rule implementation
 ├── tests/
 │   └── rules/
-│       └── require-src-extension.test.ts
+│       └── require-alias-extension.test.ts
 ├── vite.config.ts            # Build config (Vite library mode)
 ├── vitest.config.ts          # Test config
 ├── vitest.setup.ts           # Adapter: ESLint RuleTester → Vitest
@@ -78,7 +78,7 @@ src/
 
 ## Adding a New Rule
 
-1. **Create the rule file** at `src/rules/<rule-name>.ts`. Use the existing `require-src-extension.ts` as a template — it exports a `TSESLint.RuleModule<MessageIds, Options>` with typed message IDs and options.
+1. **Create the rule file** at `src/rules/<rule-name>.ts`. Use the existing `require-alias-extension.ts` as a template — it exports a `TSESLint.RuleModule<MessageIds, Options>` with typed message IDs and options.
 
 2. **Register the rule** in `src/index.ts` by importing it and adding it to the `rules` object.
 
@@ -120,7 +120,7 @@ src/
 - To run a single test file:
 
   ```bash
-  npx vitest run tests/rules/require-src-extension.test.ts
+  npx vitest run tests/rules/require-alias-extension.test.ts
   ```
 
 - For TypeScript parser–specific tests, create a separate `RuleTester` instance with `@typescript-eslint/parser`.

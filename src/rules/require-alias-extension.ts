@@ -2,7 +2,7 @@ import type { TSESLint, TSESTree } from '@typescript-eslint/utils'
 import fs from 'node:fs'
 import path from 'node:path'
 
-export type RequireSrcExtensionOptions = {
+export type RequireAliasExtensionOptions = {
   /** Project root directory, defaults to context.cwd */
   projectRoot?: string
   /** alias → target mappings; target is a path relative to projectRoot */
@@ -12,7 +12,7 @@ export type RequireSrcExtensionOptions = {
 }
 
 type MessageIds = 'missingExtension'
-type Options = [RequireSrcExtensionOptions?]
+type Options = [RequireAliasExtensionOptions?]
 
 const DEFAULT_EXTENSIONS = ['.tsx', '.ts', '.jsx', '.js']
 
@@ -27,7 +27,7 @@ const rule: TSESLint.RuleModule<MessageIds, Options> = {
     docs: {
       description:
         'Require file extensions on subpath imports (e.g. #src/*)',
-      url: 'https://github.com/dev-bb/eslint-plugin-alias-extensions#configuration',
+      url: 'https://github.com/BibbyChung/eslint-plugin-alias-extensions#configuration',
     },
     fixable: 'code',
     messages: {

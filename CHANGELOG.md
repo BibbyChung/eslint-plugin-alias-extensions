@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### ⚠️ BREAKING CHANGES
+
+- **Rule renamed:** `require-src-extension` → `require-alias-extension`. The rule has been renamed to better reflect that it works with any alias (not limited to `#src`). Update your ESLint config to use `alias-extensions/require-alias-extension` instead of `alias-extensions/require-src-extension`.
+- **Public type renamed:** `RequireSrcExtensionOptions` → `RequireAliasExtensionOptions` (re-exported from the package entry point). The shape is unchanged; update the import name if you reference this type directly.
+
+### Changed
+
+- `peerDependencies.eslint`: `>=10.0.0` → `>=9.0.0`. The plugin is now compatible with ESLint 9+ (flat config only), lowering the barrier for projects still on ESLint 9.
+- Expanded `keywords` in `package.json` to include `typescript` and `flat-config`.
+
+### Internal
+
+- Renamed implementation files via `git mv` (history preserved): `src/rules/require-src-extension.ts` → `src/rules/require-alias-extension.ts`, `tests/rules/require-src-extension.test.ts` → `tests/rules/require-alias-extension.test.ts`.
+
 ## [0.1.9] - 2026-06-20
 
 ### Fixed
@@ -137,5 +151,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.1.5]: https://github.com/BibbyChung/eslint-plugin-alias-extensions/compare/v0.1.4...v0.1.5
 [0.1.4]: https://github.com/BibbyChung/eslint-plugin-alias-extensions/compare/v0.1.3...v0.1.4
 [0.1.3]: https://github.com/BibbyChung/eslint-plugin-alias-extensions/compare/v0.1.1...v0.1.3
-[0.1.1]: https://github.com/dev-bb/eslint-plugin-alias-extensions/compare/v0.1.0...v0.1.1
-[0.1.0]: https://github.com/dev-bb/eslint-plugin-alias-extensions/releases/tag/v0.1.0
+[0.1.1]: https://github.com/BibbyChung/eslint-plugin-alias-extensions/compare/v0.1.0...v0.1.1
+[0.1.0]: https://github.com/BibbyChung/eslint-plugin-alias-extensions/releases/tag/v0.1.0

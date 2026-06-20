@@ -13,7 +13,7 @@ export default tseslint.config(
       "alias-extensions": plugin,
     },
     rules: {
-      "alias-extensions/require-src-extension": ["error", {
+      "alias-extensions/require-alias-extension": ["error", {
         mappings: [{ alias: "#src", target: "src" }],
       }],
     },

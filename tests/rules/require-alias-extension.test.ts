@@ -4,7 +4,7 @@ import path from 'node:path'
 import os from 'node:os'
 import { afterAll } from 'vitest'
 import * as tsParser from '@typescript-eslint/parser'
-import rule from '#src/rules/require-src-extension.ts'
+import rule from '#src/rules/require-alias-extension.ts'
 
 // Create tmpDir synchronously at module level so it's available
 // when the ruleTester.run() options objects are created.
@@ -33,7 +33,7 @@ const ruleTester = new TSESLint.RuleTester(
   { languageOptions: { ecmaVersion: 'latest', sourceType: 'module' } } as unknown as ConstructorParameters<typeof TSESLint.RuleTester>[0],
 )
 
-ruleTester.run('require-src-extension', rule, {
+ruleTester.run('require-alias-extension', rule, {
   valid: [
     // 1. Non-alias relative/bare imports → ignored
     "import x from './foo'",
@@ -326,7 +326,7 @@ const tsRuleTester = new TSESLint.RuleTester(
   } as unknown as ConstructorParameters<typeof TSESLint.RuleTester>[0],
 )
 
-tsRuleTester.run('require-src-extension (TS)', rule, {
+tsRuleTester.run('require-alias-extension (TS)', rule, {
   valid: [
     // export type with extension already present → skipped
     {

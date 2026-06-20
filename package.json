@@ -34,7 +34,7 @@
     "release:major": "npm version major --no-git-tag-version && git add package.json package-lock.json && npx pubv --yes major"
   },
   "peerDependencies": {
-    "eslint": ">=10.0.0"
+    "eslint": ">=9.0.0"
   },
   "optionalDependencies": {
     "@emnapi/core": "1.10.0",
@@ -61,12 +61,12 @@
   "author": "dev-bb",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dev-bb/eslint-plugin-alias-extensions.git"
+    "url": "git+https://github.com/BibbyChung/eslint-plugin-alias-extensions.git"
   },
   "bugs": {
-    "url": "https://github.com/dev-bb/eslint-plugin-alias-extensions/issues"
+    "url": "https://github.com/BibbyChung/eslint-plugin-alias-extensions/issues"
   },
-  "homepage": "https://github.com/dev-bb/eslint-plugin-alias-extensions#readme",
+  "homepage": "https://github.com/BibbyChung/eslint-plugin-alias-extensions#readme",
   "keywords": [
     "eslint",
     "eslintplugin",
@@ -76,7 +76,9 @@
     "extension",
     "alias",
     "file-extension",
-    "subpath"
+    "subpath",
+    "typescript",
+    "flat-config"
   ],
   "license": "MIT"
 }

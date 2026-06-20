@@ -1,7 +1,7 @@
 import { TSESLint } from '@typescript-eslint/utils'
-import requireSrcExtension from '#src/rules/require-src-extension.ts'
+import requireAliasExtension from '#src/rules/require-alias-extension.ts'
 
-export type { RequireSrcExtensionOptions } from '#src/rules/require-src-extension.ts'
+export type { RequireAliasExtensionOptions } from '#src/rules/require-alias-extension.ts'
 
 declare const __PKG_VERSION__: string
 
@@ -13,7 +13,7 @@ const plugin = {
   },
   configs: {} as Record<string, TSESLint.FlatConfig.ConfigArray>,
   rules: {
-    'require-src-extension': requireSrcExtension,
+    'require-alias-extension': requireAliasExtension,
   },
 } satisfies TSESLint.FlatConfig.Plugin
 
@@ -24,7 +24,7 @@ plugin.configs.recommended = [
       'alias-extensions': plugin,
     },
     rules: {
-      'alias-extensions/require-src-extension': 'error',
+      'alias-extensions/require-alias-extension': 'error',
     },
   },
 ]
