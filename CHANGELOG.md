@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.7] - 2026-06-20
+
 ### Fixed
 
 - Rebuilt `package-lock.json` to resolve cross-platform `npm ci` failures; missing `@emnapi/*@1.10.0` entries from the `@rolldown/binding-wasm32-wasi` optional dependency chain had caused `EUSAGE` errors on Linux/Windows CI while macOS (which skips the wasm32-wasi binding) installed successfully.
@@ -107,7 +109,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Configurable `extensions` option for defining which file extensions to check (defaults to `.tsx`, `.ts`, `.jsx`, `.js`).
 - Recommended flat config (`aliasExtensions.configs.recommended`) that registers the plugin and enables the rule with `error` severity.
 
-[Unreleased]: https://github.com/BibbyChung/eslint-plugin-alias-extensions/compare/v0.1.6...main
+[Unreleased]: https://github.com/BibbyChung/eslint-plugin-alias-extensions/compare/v0.1.7...main
+[0.1.7]: https://github.com/BibbyChung/eslint-plugin-alias-extensions/compare/v0.1.6...v0.1.7
 [0.1.6]: https://github.com/BibbyChung/eslint-plugin-alias-extensions/compare/v0.1.5...v0.1.6
 [0.1.5]: https://github.com/BibbyChung/eslint-plugin-alias-extensions/compare/v0.1.4...v0.1.5
 [0.1.4]: https://github.com/BibbyChung/eslint-plugin-alias-extensions/compare/v0.1.3...v0.1.4
