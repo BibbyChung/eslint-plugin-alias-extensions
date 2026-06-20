@@ -1,7 +1,7 @@
 // @ts-check
 import js from "@eslint/js";
 import tseslint from "typescript-eslint";
-import plugin from "./dist/index.js";
+import plugin from "@dev-bb/eslint-plugin-alias-extensions";
 
 export default tseslint.config(
   { ignores: ["dist/", "node_modules/", "coverage/"] },
@@ -11,6 +11,11 @@ export default tseslint.config(
     files: ["**/*.ts"],
     plugins: {
       "alias-extensions": plugin,
+    },
+    rules: {
+      "alias-extensions/require-src-extension": ["error", {
+        mappings: [{ alias: "#src", target: "src" }],
+      }],
     },
   },
 );

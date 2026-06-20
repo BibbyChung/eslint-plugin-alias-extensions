@@ -13,6 +13,10 @@
     "sourceMap": true,
     "outDir": "dist",
     "resolveJsonModule": true,
+    "paths": {
+      "#src/*": ["./src/*"]
+    },
+    "allowImportingTsExtensions": true,
     "noEmit": true,
     "isolatedModules": true
   },

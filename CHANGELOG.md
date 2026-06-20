@@ -7,6 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Subpath imports support via the `package.json` `"imports"` field (`"#src/*": "./src/*"`); internal modules are now imported through `#src/*` instead of relative paths.
+- `tsconfig.json` `paths` mapping (`"#src/*": ["./src/*"]`) plus `allowImportingTsExtensions` to permit `.ts` extensions in imports (enabled by `noEmit`).
+- Enabled the `alias-extensions/require-src-extension` rule in `eslint.config.mjs` with `mappings: [{ alias: "#src", target: "src" }]` so the rule now lints `#src/*` imports.
+
+### Changed
+
+- `eslint.config.mjs` now imports the plugin via Node.js self-referencing (`@dev-bb/eslint-plugin-alias-extensions`) instead of the relative `./dist/index.js` path.
+- Internal imports in `src/` and `tests/` switched from relative paths to `#src/*` subpath imports with explicit `.ts` extensions.
+
+### Removed
+
+- Redundant `resolve.alias` configuration in `vite.config.ts` and `vitest.config.ts`; Vite 6 and Vitest 3 natively resolve the `package.json` `"imports"` field.
+- Unused imports and variables in `vitest.config.ts` (`resolve`, `fileURLToPath`, `__dirname`) that only existed to support the removed alias.
+- `baseUrl` from `tsconfig.json` (paths resolve relative to the tsconfig since TypeScript 4.1+).
+
 ## [0.1.5] - 2026-06-20
 
 ### Fixed

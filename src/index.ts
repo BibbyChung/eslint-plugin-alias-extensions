@@ -1,5 +1,5 @@
 import { TSESLint } from '@typescript-eslint/utils'
-import requireSrcExtension from './rules/require-src-extension.js'
+import requireSrcExtension from '#src/rules/require-src-extension.ts'
 
 declare const __PKG_VERSION__: string
 

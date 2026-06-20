@@ -4,7 +4,7 @@ import path from 'node:path'
 import os from 'node:os'
 import { afterAll } from 'vitest'
 import * as tsParser from '@typescript-eslint/parser'
-import rule from '../../src/rules/require-src-extension.js'
+import rule from '#src/rules/require-src-extension.ts'
 
 // Create tmpDir synchronously at module level so it's available
 // when the ruleTester.run() options objects are created.
