@@ -7,7 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [0.1.8] - 2026-06-20
+### Fixed
+
+- Pinned `@emnapi/core` and `@emnapi/runtime` to `1.10.0` via `package.json` `optionalDependencies` to resolve cross-platform `npm ci` failures on Linux/Windows CI. Without these explicit top-level entries, npm tried to resolve `@napi-rs/wasm-runtime`'s peer dependency `@emnapi/*@^1.7.1` to the registry's latest `1.11.1`, which was absent from the lock file (EUSAGE error). macOS was unaffected because the `@rolldown/binding-wasm32-wasi` chain is optional and skipped on non-wasm32 platforms.
+
+## [0.1.8] - 2026-06-21
 
 ### Added
 
