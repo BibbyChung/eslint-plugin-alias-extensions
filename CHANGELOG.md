@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Rebuilt `package-lock.json` to resolve cross-platform `npm ci` failures; missing `@emnapi/*@1.10.0` entries from the `@rolldown/binding-wasm32-wasi` optional dependency chain had caused `EUSAGE` errors on Linux/Windows CI while macOS (which skips the wasm32-wasi binding) installed successfully.
+
 ## [0.1.6] - 2026-06-20
 
 ### Added
