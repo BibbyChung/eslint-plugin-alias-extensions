@@ -58,7 +58,7 @@
     "vite-plugin-dts": "^5.0.0",
     "vitest": "^4.0.0"
   },
-  "author": "dev-bb",
+  "author": "BibbyChung",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/BibbyChung/eslint-plugin-alias-extensions.git"
