@@ -7,7 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [0.1.7] - 2026-06-20
+### Added
+
+- `@microsoft/api-extractor` added to devDependencies. It is required by `vite-plugin-dts` v5's `bundleTypes` option (declared as an optional peer dependency, hence not auto-installed).
+
+### Fixed
+
+- `bundleTypes: true` now actually takes effect during build. Previously, the missing `@microsoft/api-extractor` optional peer dependency caused `unplugin-dts` to silently skip the bundling step, leaving `dist/rules/require-src-extension.d.ts` as a separate file and an unresolved `import('./rules/require-src-extension.ts')` reference in `dist/index.d.ts`. This issue was introduced in `0.1.6` and affects that release's published types.
+
+### Removed
+
+- `ajv` from devDependencies. Previously added as a workaround for `@rushstack/node-core-library`'s transitive dependency, it is now pulled in correctly by the explicit `@microsoft/api-extractor` installation.
+
+## [0.1.7] - 2026-06-21
 
 ### Fixed
 
