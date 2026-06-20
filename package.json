@@ -26,9 +26,9 @@
     "lint:fast": "eslint .",
     "lint:fix": "eslint . --fix",
     "prepublishOnly": "npm run typecheck && npm run build && npm test",
-    "release:patch": "npm version patch --no-git-tag-version && git add package.json && npx pubv --yes patch",
-    "release:minor": "npm version minor --no-git-tag-version && git add package.json && npx pubv --yes minor",
-    "release:major": "npm version major --no-git-tag-version && git add package.json && npx pubv --yes major"
+    "release:patch": "npm version patch --no-git-tag-version && git add package.json package-lock.json && npx pubv --yes patch",
+    "release:minor": "npm version minor --no-git-tag-version && git add package.json package-lock.json && npx pubv --yes minor",
+    "release:major": "npm version major --no-git-tag-version && git add package.json package-lock.json && npx pubv --yes major"
   },
   "peerDependencies": {
     "eslint": ">=9.0.0"
