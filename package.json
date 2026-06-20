@@ -1,6 +1,6 @@
 {
   "name": "@dev-bb/eslint-plugin-alias-extensions",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "ESLint plugin to enforce file extensions for alias imports",
   "type": "module",
   "sideEffects": false,
@@ -25,7 +25,10 @@
     "lint": "npm run build && eslint .",
     "lint:fast": "eslint .",
     "lint:fix": "eslint . --fix",
-    "prepublishOnly": "npm run typecheck && npm run build && npm test"
+    "prepublishOnly": "npm run typecheck && npm run build && npm test",
+    "release:patch": "npm version patch --no-git-tag-version && git add package.json && npx pubv --yes patch",
+    "release:minor": "npm version minor --no-git-tag-version && git add package.json && npx pubv --yes minor",
+    "release:major": "npm version major --no-git-tag-version && git add package.json && npx pubv --yes major"
   },
   "peerDependencies": {
     "eslint": ">=9.0.0"
