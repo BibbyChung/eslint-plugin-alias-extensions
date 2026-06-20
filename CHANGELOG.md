@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.6] - 2026-06-20
+
 ### Added
 
 - Subpath imports support via the `package.json` `"imports"` field (`"#src/*": "./src/*"`); internal modules are now imported through `#src/*` instead of relative paths.
@@ -101,7 +103,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Configurable `extensions` option for defining which file extensions to check (defaults to `.tsx`, `.ts`, `.jsx`, `.js`).
 - Recommended flat config (`aliasExtensions.configs.recommended`) that registers the plugin and enables the rule with `error` severity.
 
-[Unreleased]: https://github.com/BibbyChung/eslint-plugin-alias-extensions/compare/v0.1.5...main
+[Unreleased]: https://github.com/BibbyChung/eslint-plugin-alias-extensions/compare/v0.1.6...main
+[0.1.6]: https://github.com/BibbyChung/eslint-plugin-alias-extensions/compare/v0.1.5...v0.1.6
 [0.1.5]: https://github.com/BibbyChung/eslint-plugin-alias-extensions/compare/v0.1.4...v0.1.5
 [0.1.4]: https://github.com/BibbyChung/eslint-plugin-alias-extensions/compare/v0.1.3...v0.1.4
 [0.1.3]: https://github.com/BibbyChung/eslint-plugin-alias-extensions/compare/v0.1.1...v0.1.3
