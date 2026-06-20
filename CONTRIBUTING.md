@@ -156,4 +156,25 @@ This project follows consistent conventions. Please adhere to them:
 
 ## Releasing
 
-Releases are managed by the project maintainers. The `prepublishOnly` script runs `typecheck`, `build`, and `test` before publishing to npm. Refer to the project's GitHub Releases for changelog history.
+This project uses [pubv](https://github.com/runwisp/pubv) to automate version bumping and CHANGELOG graduation.
+
+1. Make sure all changes are committed and the `[Unreleased]` section in `CHANGELOG.md` is up to date.
+2. Run the release:
+
+   ```bash
+   npx pubv --yes patch   # or minor / major
+   ```
+
+   pubv will automatically:
+   - Graduate `[Unreleased]` into a new versioned section with today's date
+   - Add a fresh empty `[Unreleased]` section
+   - Update `[Unreleased]` and version reference links at the bottom
+   - Bump the version in `package.json`
+   - Create a git commit and tag (`vX.Y.Z`)
+   - Push to remote
+
+3. The `v*` tag push triggers the GitHub Actions workflow (`.github/workflows/release.yml`), which runs `npm publish`.
+
+> **Tip**: Use `npx pubv --dry-run patch` to preview the changes before committing.
+
+The `prepublishOnly` script runs `typecheck`, `build`, and `test` before publishing to npm.
