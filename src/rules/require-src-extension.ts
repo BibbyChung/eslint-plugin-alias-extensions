@@ -27,6 +27,7 @@ const rule: TSESLint.RuleModule<MessageIds, Options> = {
     docs: {
       description:
         'Require file extensions on subpath imports (e.g. #src/*)',
+      url: 'https://github.com/dev-bb/eslint-plugin-alias-extensions#configuration',
     },
     fixable: 'code',
     messages: {
@@ -67,13 +68,14 @@ const rule: TSESLint.RuleModule<MessageIds, Options> = {
     const sourceCode =
       context.sourceCode ?? context.getSourceCode()
 
-    function checkSource(node: DeclarationNode): void {
-      // Bail out when source is null (e.g. ExportNamedDeclaration without source)
-      const srcNode = node.source
-      if (!srcNode) return
-      const src = srcNode.value
-      if (typeof src !== 'string') return
-
+    /**
+     * Core check logic shared by static (ImportDeclaration/ExportNamedDeclaration/ExportAllDeclaration)
+     * and dynamic (ImportExpression) imports.
+     *
+     * @param src         The import path string (e.g. '#src/lib/utils')
+     * @param sourceNode  The AST node representing the source value (used for reporting/fixing)
+     */
+    function checkImportPath(src: string, sourceNode: TSESTree.Node): void {
       // Already has one of the expected extensions → skip
       if (extensions.some((ext) => src.endsWith(ext))) return
 
@@ -109,26 +111,53 @@ const rule: TSESLint.RuleModule<MessageIds, Options> = {
       if (!found) return
 
       // Preserve the original quote style
-      const raw = sourceCode.getText(srcNode)
+      const raw = sourceCode.getText(sourceNode)
       const quote = raw[0]
 
       context.report({
-        node: srcNode,
+        node: sourceNode,
         messageId: 'missingExtension',
         data: { ext: found, importPath: src },
         fix(fixer) {
           return fixer.replaceText(
-            srcNode,
+            sourceNode,
             `${quote}${src}${found}${quote}`,
           )
         },
       })
     }
 
+    /**
+     * Handler for ImportDeclaration / ExportNamedDeclaration / ExportAllDeclaration.
+     * These always have a StringLiteral as source.
+     */
+    function checkSource(node: DeclarationNode): void {
+      // Bail out when source is null (e.g. ExportNamedDeclaration without source)
+      const srcNode = node.source
+      if (!srcNode) return
+      const src = srcNode.value
+      if (typeof src !== 'string') return
+      checkImportPath(src, srcNode)
+    }
+
+    /**
+     * Handler for dynamic import() expressions.
+     * Only handles literal string sources (e.g. `import('#src/foo')`).
+     * Skips non-literal sources like template literals or identifiers.
+     */
+    function checkDynamicImport(node: TSESTree.ImportExpression): void {
+      const source = node.source
+      // Only handle literal string values; skip TemplateLiteral, Identifier, etc.
+      if (source.type !== 'Literal') return
+      if (typeof source.value !== 'string') return
+      checkImportPath(source.value, source)
+    }
+
     return {
       ImportDeclaration: checkSource,
       ExportNamedDeclaration: checkSource,
       ExportAllDeclaration: checkSource,
+      ImportExpression: checkDynamicImport,
     }
   },
 }

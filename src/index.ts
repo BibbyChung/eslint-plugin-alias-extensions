@@ -1,10 +1,12 @@
 import { TSESLint } from '@typescript-eslint/utils'
 import requireSrcExtension from './rules/require-src-extension.js'
 
+declare const __PKG_VERSION__: string
+
 const plugin = {
   meta: {
     name: '@dev-bb/eslint-plugin-alias-extensions',
-    version: '0.1.0',
+    version: __PKG_VERSION__,
     namespace: 'alias-extensions',
   },
   configs: {} as Record<string, TSESLint.FlatConfig.ConfigArray>,

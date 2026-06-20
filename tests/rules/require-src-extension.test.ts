@@ -3,6 +3,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 import os from 'node:os'
 import { afterAll } from 'vitest'
+import * as tsParser from '@typescript-eslint/parser'
 import rule from '../../src/rules/require-src-extension.js'
 
 // Create tmpDir synchronously at module level so it's available
@@ -72,6 +73,24 @@ ruleTester.run('require-src-extension', rule, {
           mappings: [{ alias: '#src', target: 'src' }],
           extensions: ['.tsx'],
         },
+      ],
+    },
+
+    // ── Dynamic import() tests ──
+
+    // 7. Dynamic import: alias import already has an extension → skipped
+    {
+      code: "import('#src/lib/utils.ts')",
+      options: [
+        { projectRoot: tmpDir, mappings: [{ alias: '#src', target: 'src' }] },
+      ],
+    },
+
+    // 8. Dynamic import: template literal source → skipped (only Literal sources are checked)
+    {
+      code: "import(`#src/lib/utils`)",
+      options: [
+        { projectRoot: tmpDir, mappings: [{ alias: '#src', target: 'src' }] },
       ],
     },
   ],
@@ -219,6 +238,76 @@ ruleTester.run('require-src-extension', rule, {
         },
       ],
       output: "import helpers from '#shared/helpers.ts'",
+    },
+
+    // ── Dynamic import() tests ──
+
+    // 11. Dynamic import: missing extension, resolves to .ts → fixed
+    {
+      code: "import('#src/lib/utils')",
+      options: [
+        { projectRoot: tmpDir, mappings: [{ alias: '#src', target: 'src' }] },
+      ],
+      errors: [
+        {
+          messageId: 'missingExtension' as const,
+          data: { ext: '.ts', importPath: '#src/lib/utils' },
+        },
+      ],
+      output: "import('#src/lib/utils.ts')",
+    },
+  ],
+})
+
+// ── TypeScript-specific tests with @typescript-eslint/parser ──
+const tsRuleTester = new TSESLint.RuleTester(
+  {
+    languageOptions: {
+      parser: tsParser as never,
+      ecmaVersion: 'latest',
+      sourceType: 'module',
+    },
+  } as unknown as ConstructorParameters<typeof TSESLint.RuleTester>[0],
+)
+
+tsRuleTester.run('require-src-extension (TS)', rule, {
+  valid: [
+    // export type with extension already present → skipped
+    {
+      code: "export type { Foo } from '#src/lib/utils.ts'",
+      options: [
+        { projectRoot: tmpDir, mappings: [{ alias: '#src', target: 'src' }] },
+      ],
+    },
+  ],
+  invalid: [
+    // export type { X } from '...' without extension
+    {
+      code: "export type { Foo } from '#src/lib/utils'",
+      options: [
+        { projectRoot: tmpDir, mappings: [{ alias: '#src', target: 'src' }] },
+      ],
+      errors: [
+        {
+          messageId: 'missingExtension' as const,
+          data: { ext: '.ts', importPath: '#src/lib/utils' },
+        },
+      ],
+      output: "export type { Foo } from '#src/lib/utils.ts'",
+    },
+    // import type { X } from '...' without extension
+    {
+      code: "import type { Foo } from '#src/lib/utils'",
+      options: [
+        { projectRoot: tmpDir, mappings: [{ alias: '#src', target: 'src' }] },
+      ],
+      errors: [
+        {
+          messageId: 'missingExtension' as const,
+          data: { ext: '.ts', importPath: '#src/lib/utils' },
+        },
+      ],
+      output: "import type { Foo } from '#src/lib/utils.ts'",
     },
   ],
 })

@@ -19,7 +19,7 @@ import Loading from '#src/lib/ui/Loading.tsx'
 import { utils } from '#src/lib/ui/index.ts'
 ```
 
-The plugin handles `ImportDeclaration`, `ExportNamedDeclaration`, and `ExportAllDeclaration` nodes, so both imports and re-exports are covered.
+The plugin handles `ImportDeclaration`, `ExportNamedDeclaration`, `ExportAllDeclaration`, and dynamic `import()` expressions (`ImportExpression`), so static imports, re-exports, and dynamic imports are all covered.
 
 ---
 
@@ -163,9 +163,9 @@ export default [
 
 ## How It Works
 
-The `require-src-extension` rule inspects every `ImportDeclaration`, `ExportNamedDeclaration`, and `ExportAllDeclaration` node in your source files.
+The `require-src-extension` rule inspects every `ImportDeclaration`, `ExportNamedDeclaration`, `ExportAllDeclaration`, and `ImportExpression` (dynamic `import()`) node in your source files.
 
-1. **Matching phase** — only import paths that match one of your configured aliases (e.g. `#src/*`) are checked. Relative imports (`./foo`), absolute imports (`/foo`), and bare specifiers (`lodash`) are ignored.
+1. **Matching phase** — only import paths that match one of your configured aliases (e.g. `#src/*`) are checked. Relative imports (`./foo`), absolute imports (`/foo`), and bare specifiers (`lodash`) are ignored. For dynamic `import()` expressions, only **literal** sources (e.g. `import('#src/foo')`) are checked; variable or template-literal sources (e.g. `import(someVar)`, `` import(`#src/${x}`) ``) are skipped since the path cannot be determined statically.
 2. **Skip phase** — if the import path already ends with one of the configured `extensions`, it is skipped (no false positive).
 3. **Resolution phase** — for each configured extension (in order), the rule tries two lookups:
    - **Direct file**: `{importPath}{ext}` (e.g. `#src/lib/Loading.tsx`)

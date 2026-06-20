@@ -34,6 +34,7 @@
   "devDependencies": {
     "@eslint/js": "^9.0.0",
     "@types/node": "^26.0.0",
+    "@typescript-eslint/parser": "^8.0.0",
     "@typescript-eslint/utils": "^8.0.0",
     "eslint": "^9.0.0",
     "typescript": "^5.9.0",
@@ -42,11 +43,25 @@
     "vite-plugin-dts": "^4.0.0",
     "vitest": "^3.0.0"
   },
+  "author": "dev-bb",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dev-bb/eslint-plugin-alias-extensions.git"
+  },
+  "bugs": {
+    "url": "https://github.com/dev-bb/eslint-plugin-alias-extensions/issues"
+  },
+  "homepage": "https://github.com/dev-bb/eslint-plugin-alias-extensions#readme",
   "keywords": [
     "eslint",
     "eslintplugin",
     "eslint-plugin",
-    "alias-extensions"
+    "alias-extensions",
+    "import",
+    "extension",
+    "alias",
+    "file-extension",
+    "subpath"
   ],
   "license": "MIT"
 }
