@@ -64,6 +64,10 @@ const rule: TSESLint.RuleModule<MessageIds, Options> = {
     const options = context.options[0] ?? {}
     const projectRoot = options.projectRoot ?? context.cwd
     const mappings = options.mappings ?? []
+    // Sort by alias length descending so longer (more specific) aliases match first
+    const sortedMappings = [...mappings].sort(
+      (a, b) => b.alias.length - a.alias.length,
+    )
     const extensions = options.extensions ?? DEFAULT_EXTENSIONS
     const sourceCode =
       context.sourceCode ?? context.getSourceCode()
@@ -80,7 +84,7 @@ const rule: TSESLint.RuleModule<MessageIds, Options> = {
       if (extensions.some((ext) => src.endsWith(ext))) return
 
       // Find the matching alias mapping
-      const mapping = mappings.find(
+      const mapping = sortedMappings.find(
         (m) => src === m.alias || src.startsWith(m.alias + '/'),
       )
       if (!mapping) return

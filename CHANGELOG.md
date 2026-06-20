@@ -12,6 +12,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `CHANGELOG.md` following the [Keep a Changelog](https://keepachangelog.com/) format.
 - `CONTRIBUTING.md` with development setup, code style guide, and contribution workflow.
 
+### Changed
+
+- Added `"sideEffects": false` to `package.json` to enable safe tree-shaking for consumers.
+
+### Fixed
+
+- Alias prefix collision: when multiple aliases share a common prefix (e.g. `#src` and `#src/components`), the longest alias now matches first to prevent incorrect path resolution.
+
 ## [0.1.1] - 2026-06-20
 
 ### Added

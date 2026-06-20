@@ -93,6 +93,14 @@ ruleTester.run('require-src-extension', rule, {
         { projectRoot: tmpDir, mappings: [{ alias: '#src', target: 'src' }] },
       ],
     },
+
+    // 9. Regression guard: #src-v2 prefix should NOT be matched by #src (trailing slash protection)
+    {
+      code: "import x from '#src-v2/foo'",
+      options: [
+        { projectRoot: tmpDir, mappings: [{ alias: '#src', target: 'src' }] },
+      ],
+    },
   ],
 
   invalid: [
@@ -255,6 +263,54 @@ ruleTester.run('require-src-extension', rule, {
         },
       ],
       output: "import('#src/lib/utils.ts')",
+    },
+
+    // ── Alias conflict resolution (longest prefix wins) tests ──
+
+    // 12. Long alias should take precedence over shorter alias when both match the import path
+    //     #src/ui (target=src/lib/ui) is more specific than #src (target=src).
+    //     Without the fix, #src matches first and resolves to src/ui/Loading which doesn't exist → no error (wrong).
+    //     With the fix, #src/ui matches first and resolves to src/lib/ui/Loading which exists → error (correct).
+    {
+      code: "import Loading from '#src/ui/Loading'",
+      options: [
+        {
+          projectRoot: tmpDir,
+          mappings: [
+            { alias: '#src', target: 'src' },
+            { alias: '#src/ui', target: 'src/lib/ui' },
+          ],
+        },
+      ],
+      errors: [
+        {
+          messageId: 'missingExtension' as const,
+          data: { ext: '.tsx', importPath: '#src/ui/Loading' },
+        },
+      ],
+      output: "import Loading from '#src/ui/Loading.tsx'",
+    },
+
+    // 13. Short alias still matches non-conflicting paths
+    //     #src/lib/utils does NOT start with #src/ui/, so it falls through to #src → resolved correctly.
+    {
+      code: "import { foo } from '#src/lib/utils'",
+      options: [
+        {
+          projectRoot: tmpDir,
+          mappings: [
+            { alias: '#src', target: 'src' },
+            { alias: '#src/ui', target: 'src/lib/ui' },
+          ],
+        },
+      ],
+      errors: [
+        {
+          messageId: 'missingExtension' as const,
+          data: { ext: '.ts', importPath: '#src/lib/utils' },
+        },
+      ],
+      output: "import { foo } from '#src/lib/utils.ts'",
     },
   ],
 })

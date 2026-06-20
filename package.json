@@ -3,6 +3,7 @@
   "version": "0.1.2",
   "description": "ESLint plugin to enforce file extensions for alias imports",
   "type": "module",
+  "sideEffects": false,
   "types": "./dist/index.d.ts",
   "main": "./dist/index.cjs",
   "exports": {
@@ -13,7 +14,8 @@
     }
   },
   "files": [
-    "dist"
+    "dist",
+    "CHANGELOG.md"
   ],
   "scripts": {
     "build": "vite build",
