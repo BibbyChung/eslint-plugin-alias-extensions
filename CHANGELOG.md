@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Version number synchronization during release: integrated the release workflow into npm scripts (`release:patch`, `release:minor`, `release:major`) to keep `package.json`, `package-lock.json`, and `CHANGELOG.md` version numbers in sync within a single release commit.
+
 ## [0.1.4] - 2026-06-20
 
 - Added `pubv` to publish tools
