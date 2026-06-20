@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.3] - 2026-06-20
+
 ### Added
 
 - `CHANGELOG.md` following the [Keep a Changelog](https://keepachangelog.com/) format.
@@ -60,6 +62,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Configurable `extensions` option for defining which file extensions to check (defaults to `.tsx`, `.ts`, `.jsx`, `.js`).
 - Recommended flat config (`aliasExtensions.configs.recommended`) that registers the plugin and enables the rule with `error` severity.
 
-[Unreleased]: https://github.com/dev-bb/eslint-plugin-alias-extensions/compare/v0.1.1...HEAD
+[Unreleased]: https://github.com/BibbyChung/eslint-plugin-alias-extensions/compare/v0.1.3...main
+[0.1.3]: https://github.com/BibbyChung/eslint-plugin-alias-extensions/compare/v0.1.1...v0.1.3
 [0.1.1]: https://github.com/dev-bb/eslint-plugin-alias-extensions/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/dev-bb/eslint-plugin-alias-extensions/releases/tag/v0.1.0
