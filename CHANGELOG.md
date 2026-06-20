@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.9] - 2026-06-20
+
 ### Fixed
 
 - Pinned `@emnapi/core` and `@emnapi/runtime` to `1.10.0` via `package.json` `optionalDependencies` to resolve cross-platform `npm ci` failures on Linux/Windows CI. Without these explicit top-level entries, npm tried to resolve `@napi-rs/wasm-runtime`'s peer dependency `@emnapi/*@^1.7.1` to the registry's latest `1.11.1`, which was absent from the lock file (EUSAGE error). macOS was unaffected because the `@rolldown/binding-wasm32-wasi` chain is optional and skipped on non-wasm32 platforms.
@@ -127,7 +129,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Configurable `extensions` option for defining which file extensions to check (defaults to `.tsx`, `.ts`, `.jsx`, `.js`).
 - Recommended flat config (`aliasExtensions.configs.recommended`) that registers the plugin and enables the rule with `error` severity.
 
-[Unreleased]: https://github.com/BibbyChung/eslint-plugin-alias-extensions/compare/v0.1.8...main
+[Unreleased]: https://github.com/BibbyChung/eslint-plugin-alias-extensions/compare/v0.1.9...main
+[0.1.9]: https://github.com/BibbyChung/eslint-plugin-alias-extensions/compare/v0.1.8...v0.1.9
 [0.1.8]: https://github.com/BibbyChung/eslint-plugin-alias-extensions/compare/v0.1.7...v0.1.8
 [0.1.7]: https://github.com/BibbyChung/eslint-plugin-alias-extensions/compare/v0.1.6...v0.1.7
 [0.1.6]: https://github.com/BibbyChung/eslint-plugin-alias-extensions/compare/v0.1.5...v0.1.6
