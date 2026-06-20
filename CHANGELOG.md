@@ -9,7 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- _(none yet)_
+- `CHANGELOG.md` following the [Keep a Changelog](https://keepachangelog.com/) format.
+- `CONTRIBUTING.md` with development setup, code style guide, and contribution workflow.
 
 ## [0.1.1] - 2026-06-20
 
@@ -34,7 +35,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- CI workflow permissions corrected.
+- Upgraded `actions/checkout` and `actions/setup-node` from `@v4` to `@v5` to resolve the Node.js 20 deprecation warning on GitHub Actions runners.
 
 ## [0.1.0] - 2026-06-20
 
@@ -49,7 +50,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Configurable `mappings` option for defining alias-to-directory mappings.
 - Configurable `extensions` option for defining which file extensions to check (defaults to `.tsx`, `.ts`, `.jsx`, `.js`).
 - Recommended flat config (`aliasExtensions.configs.recommended`) that registers the plugin and enables the rule with `error` severity.
-- `no-foo` placeholder rule (removed in a later commit).
 
 [Unreleased]: https://github.com/dev-bb/eslint-plugin-alias-extensions/compare/v0.1.1...HEAD
 [0.1.1]: https://github.com/dev-bb/eslint-plugin-alias-extensions/compare/v0.1.0...v0.1.1
