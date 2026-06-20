@@ -69,8 +69,7 @@ const rule: TSESLint.RuleModule<MessageIds, Options> = {
       (a, b) => b.alias.length - a.alias.length,
     )
     const extensions = options.extensions ?? DEFAULT_EXTENSIONS
-    const sourceCode =
-      context.sourceCode ?? context.getSourceCode()
+    const sourceCode = context.sourceCode
 
     /**
      * Core check logic shared by static (ImportDeclaration/ExportNamedDeclaration/ExportAllDeclaration)

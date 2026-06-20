@@ -12,17 +12,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Subpath imports support via the `package.json` `"imports"` field (`"#src/*": "./src/*"`); internal modules are now imported through `#src/*` instead of relative paths.
 - `tsconfig.json` `paths` mapping (`"#src/*": ["./src/*"]`) plus `allowImportingTsExtensions` to permit `.ts` extensions in imports (enabled by `noEmit`).
 - Enabled the `alias-extensions/require-src-extension` rule in `eslint.config.mjs` with `mappings: [{ alias: "#src", target: "src" }]` so the rule now lints `#src/*` imports.
+- `RequireSrcExtensionOptions` is now re-exported from `src/index.ts` as a public type; consumers can `import type { RequireSrcExtensionOptions } from '@dev-bb/eslint-plugin-alias-extensions'`.
+- `"packageManager": "npm@11.6.2"` field in `package.json` to lock the package manager.
+- `types: ["node"]` in `tsconfig.json` (TypeScript 6 changed `types` default to `[]`).
+- `ajv` added to devDependencies (required transitively by `@rushstack/node-core-library` during `vite-plugin-dts` v5 `bundleTypes` flow).
 
 ### Changed
 
 - `eslint.config.mjs` now imports the plugin via Node.js self-referencing (`@dev-bb/eslint-plugin-alias-extensions`) instead of the relative `./dist/index.js` path.
 - Internal imports in `src/` and `tests/` switched from relative paths to `#src/*` subpath imports with explicit `.ts` extensions.
+- **Toolchain upgrades:** `typescript` ^5.9 → ^6.0, `eslint` and `@eslint/js` ^9 → ^10, `vite` ^6 → ^8 (**now bundles with Rolldown by default**), `vitest` ^3 → ^4, `vite-plugin-dts` ^4 → ^5, `typescript-eslint` / `@typescript-eslint/*` ^8.0 → ^8.61.
+- `engines.node`: `>=18.18.0` → `>=20.19.0` (required by ESLint 10).
+- `peerDependencies.eslint`: `>=9.0.0` → `>=10.0.0`.
+- `vite.config.ts`: `rollupOptions` renamed to `rolldownOptions` (Vite 8 + Rolldown).
+- `vite.config.ts`: dts plugin now uses `bundleTypes: true` with `compilerOptions: { rootDir: "src" }`; all `.d.ts` are bundled into a single `dist/index.d.ts` (fixes the published-types resolution issue where `import('./rules/...ts')` could not be resolved by consumers).
+- `src/rules/require-src-extension.ts`: simplified `context.sourceCode ?? context.getSourceCode()` to `context.sourceCode` (`getSourceCode()` was removed in ESLint 10).
 
 ### Removed
 
 - Redundant `resolve.alias` configuration in `vite.config.ts` and `vitest.config.ts`; Vite 6 and Vitest 3 natively resolve the `package.json` `"imports"` field.
 - Unused imports and variables in `vitest.config.ts` (`resolve`, `fileURLToPath`, `__dirname`) that only existed to support the removed alias.
 - `baseUrl` from `tsconfig.json` (paths resolve relative to the tsconfig since TypeScript 4.1+).
+- `rollupTypes: false` from `vite.config.ts` (`vite-plugin-dts` v5 dropped this option).
+- pnpm leftovers: `node_modules/.pnpm/` directory (~120 MB of stale packages) and `node_modules/.pnpm-workspace-state-v1.json` (the project has migrated from pnpm to npm).
 
 ## [0.1.5] - 2026-06-20
 

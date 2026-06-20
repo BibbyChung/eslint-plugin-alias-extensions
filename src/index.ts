@@ -1,6 +1,8 @@
 import { TSESLint } from '@typescript-eslint/utils'
 import requireSrcExtension from '#src/rules/require-src-extension.ts'
 
+export type { RequireSrcExtensionOptions } from '#src/rules/require-src-extension.ts'
+
 declare const __PKG_VERSION__: string
 
 const plugin = {

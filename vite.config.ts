@@ -15,11 +15,12 @@ export default defineConfig({
   },
   plugins: [
     dts({
-      entryRoot: "src",
-      outDir: "dist",
       tsconfigPath: "./tsconfig.json",
-      rollupTypes: false,
       include: ["src/**/*.ts"],
+      compilerOptions: {
+        rootDir: "src",
+      },
+      bundleTypes: true,
     }),
   ],
   build: {
@@ -28,7 +29,7 @@ export default defineConfig({
       formats: ["es", "cjs"],
       fileName: (format) => `index.${format === "es" ? "js" : "cjs"}`,
     },
-    rollupOptions: {
+    rolldownOptions: {
       external: ["eslint", /^node:/],
     },
     minify: false,
