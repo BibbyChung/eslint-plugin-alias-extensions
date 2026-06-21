@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- "TypeScript configuration" guide to README, documenting the required `tsconfig.json` settings (`allowImportingTsExtensions`, `moduleResolution: "bundler"`, `noEmit`) for consumers — since the rule enforces explicit `.ts`/`.tsx` extensions on alias imports, TypeScript must be configured to allow importing those extensions.
+
 ## [0.2.1] - 2026-06-21
 
 ### Added

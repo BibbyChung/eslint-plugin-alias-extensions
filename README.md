@@ -78,6 +78,24 @@ npx eslint . --fix
 
 ## Configuration
 
+### TypeScript configuration
+
+Because this rule enforces explicit file extensions (`.ts`, `.tsx`, …) on alias imports, TypeScript must be configured to allow importing those extensions — otherwise `tsc` will reject paths like `#src/lib/ui/index.ts` with error `TS5097`.
+
+Add the following to your `tsconfig.json`:
+
+```json
+{
+  "compilerOptions": {
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "noEmit": true
+  }
+}
+```
+
+> `allowImportingTsExtensions` requires `moduleResolution` to be `bundler` (or `node16`/`nodenext`) and either `noEmit` or `emitDeclarationOnly` to be set, because TypeScript cannot rewrite `.ts` extensions into `.js` in the emitted output. If you still need `tsc` to emit JavaScript, keep `noEmit` false and set `emitDeclarationOnly: true` instead, then compile your JS with a separate build tool (e.g. Vite, esbuild, swc).
+
 ### Using the recommended config
 
 The `aliasExtensions.configs.recommended` config object registers the plugin and enables the rule with `'error'` severity:
