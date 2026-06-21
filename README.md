@@ -27,7 +27,7 @@ The plugin handles `ImportDeclaration`, `ExportNamedDeclaration`, `ExportAllDecl
 
 | Dependency | Version |
 |---|---|
-| **Node.js** | `>=18.18.0` |
+| **Node.js** | `>=20.19.0` |
 | **ESLint** | `>=9.0.0` |
 
 > This plugin only supports ESLint's **Flat Config** (`eslint.config.js`). It does **not** work with the legacy `.eslintrc*` format.
@@ -140,6 +140,42 @@ export default [
   },
 ]
 ```
+
+### Working with monorepos
+
+In a monorepo, multiple packages often share the same alias (e.g. each package uses `#src` to point to its own `src/` directory, resolved per-package via Node.js subpath imports). Because the rule picks the **first matching mapping** for a given alias, listing multiple targets for the same alias in a single rule entry won't work — only the first one takes effect, and imports in other packages will be silently skipped.
+
+To handle this, scope the rule to each package with ESLint's `files` glob. Each block configures its own `mappings`, so files in every package are linted against the correct target — mirroring how Node.js resolves subpath imports per `package.json`.
+
+```js
+import aliasExtensions from '@dev-bb/eslint-plugin-alias-extensions'
+
+export default [
+  ...aliasExtensions.configs.recommended,
+
+  // Web app — its `#src` points to apps/web/src
+  {
+    files: ['apps/web/**'],
+    rules: {
+      'alias-extensions/require-alias-extension': ['error', {
+        mappings: [{ alias: '#src', target: 'apps/web/src' }],
+      }],
+    },
+  },
+
+  // Shared UI package — its `#src` points to packages/ui/src
+  {
+    files: ['packages/ui/**'],
+    rules: {
+      'alias-extensions/require-alias-extension': ['error', {
+        mappings: [{ alias: '#src', target: 'packages/ui/src' }],
+      }],
+    },
+  },
+]
+```
+
+Each package should also declare the matching `"imports"` entry in its own `package.json` (e.g. `"#src/*": "./src/*"`) so Node.js resolves `#src` the same way at runtime.
 
 ### Rule Options
 

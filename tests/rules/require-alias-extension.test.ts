@@ -24,6 +24,9 @@ touch('src/components/Button.tsx')
 touch('shared/helpers.ts')
 // Separate fixture dir to test the relPath === '' branch (alias exactly equals import path)
 touch('src2/index.ts')
+// Fixture for "same alias, multiple targets" behavior: this file exists only under `other/`,
+// not under `src/`. Used to document that only the first target is checked.
+touch('other/helpers.ts')
 
 afterAll(() => {
   fs.rmSync(tmpDir, { recursive: true, force: true })
@@ -99,6 +102,25 @@ ruleTester.run('require-alias-extension', rule, {
       code: "import x from '#src-v2/foo'",
       options: [
         { projectRoot: tmpDir, mappings: [{ alias: '#src', target: 'src' }] },
+      ],
+    },
+
+    // 10. Documents current behavior: when the same alias maps to multiple targets,
+    //     only the FIRST matching target is used (Array.find stops at first match).
+    //     Here `#src/helpers` resolves via the first target (`src`), where the file
+    //     does not exist → silent skip → no error. The file under the second target
+    //     (`other`) is never checked. Monorepo users should scope the rule per-package
+    //     via ESLint's `files` glob instead (see README "Working with monorepos").
+    {
+      code: "import x from '#src/helpers'",
+      options: [
+        {
+          projectRoot: tmpDir,
+          mappings: [
+            { alias: '#src', target: 'src' },
+            { alias: '#src', target: 'other' },
+          ],
+        },
       ],
     },
   ],

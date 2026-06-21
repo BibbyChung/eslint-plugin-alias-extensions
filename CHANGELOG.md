@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- "Working with monorepos" guide to README, documenting how to scope the rule per-package via ESLint's `files` glob when multiple packages share the same alias (e.g. `#src`).
+- Regression test documenting that duplicate aliases resolve to the first matching target.
+
+### Changed
+
+- Unified `author` field to `BibbyChung` for brand consistency with the GitHub organization.
+
+### Fixed
+
+- Stale `github.com/dev-bb` URLs (404) in the published package — 0.2.0 shipped a `dist/` built before the source URLs were updated to `BibbyChung`.
+
 ## [0.2.0] - 2026-06-20
 
 ### ⚠️ BREAKING CHANGES
