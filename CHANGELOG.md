@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.2] - 2026-06-21
+
 ### Added
 
 - "TypeScript configuration" guide to README, documenting the required `tsconfig.json` settings (`allowImportingTsExtensions`, `moduleResolution: "bundler"`, `noEmit`) for consumers — since the rule enforces explicit `.ts`/`.tsx` extensions on alias imports, TypeScript must be configured to allow importing those extensions.
@@ -164,7 +166,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Configurable `extensions` option for defining which file extensions to check (defaults to `.tsx`, `.ts`, `.jsx`, `.js`).
 - Recommended flat config (`aliasExtensions.configs.recommended`) that registers the plugin and enables the rule with `error` severity.
 
-[Unreleased]: https://github.com/BibbyChung/eslint-plugin-alias-extensions/compare/v0.2.1...main
+[Unreleased]: https://github.com/BibbyChung/eslint-plugin-alias-extensions/compare/v0.2.2...main
+[0.2.2]: https://github.com/BibbyChung/eslint-plugin-alias-extensions/compare/v0.2.1...v0.2.2
 [0.2.1]: https://github.com/BibbyChung/eslint-plugin-alias-extensions/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/BibbyChung/eslint-plugin-alias-extensions/compare/v0.1.9...v0.2.0
 [0.1.9]: https://github.com/BibbyChung/eslint-plugin-alias-extensions/compare/v0.1.8...v0.1.9
