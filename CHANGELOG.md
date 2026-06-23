@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.3] - 2026-06-23
+
 ### Added
 
 - `no-relative-imports` rule — detects relative imports (`./`, `../`) and autofixes them to the resolved alias path, automatically reading aliases from `package.json` `imports` and `tsconfig.json` `paths`. Covers `ImportDeclaration`, `ExportNamedDeclaration`, `ExportAllDeclaration`, and dynamic `import()` — replaces the unmaintained `eslint-plugin-no-relative-import-paths`, which is broken on ESLint 9+.
@@ -171,7 +173,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Configurable `extensions` option for defining which file extensions to check (defaults to `.tsx`, `.ts`, `.jsx`, `.js`).
 - Recommended flat config (`aliasExtensions.configs.recommended`) that registers the plugin and enables the rule with `error` severity.
 
-[Unreleased]: https://github.com/BibbyChung/eslint-plugin-alias-extensions/compare/v0.2.2...main
+[Unreleased]: https://github.com/BibbyChung/eslint-plugin-alias-extensions/compare/v0.2.3...main
+[0.2.3]: https://github.com/BibbyChung/eslint-plugin-alias-extensions/compare/v0.2.2...v0.2.3
 [0.2.2]: https://github.com/BibbyChung/eslint-plugin-alias-extensions/compare/v0.2.1...v0.2.2
 [0.2.1]: https://github.com/BibbyChung/eslint-plugin-alias-extensions/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/BibbyChung/eslint-plugin-alias-extensions/compare/v0.1.9...v0.2.0
