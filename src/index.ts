@@ -1,7 +1,9 @@
-import { TSESLint } from '@typescript-eslint/utils'
+import type { TSESLint } from '@typescript-eslint/utils'
 import requireAliasExtension from '#src/rules/require-alias-extension.ts'
+import noRelativeImports from '#src/rules/no-relative-imports.ts'
 
 export type { RequireAliasExtensionOptions } from '#src/rules/require-alias-extension.ts'
+export type { NoRelativeImportsOptions } from '#src/rules/no-relative-imports.ts'
 
 declare const __PKG_VERSION__: string
 
@@ -14,6 +16,7 @@ const plugin = {
   configs: {} as Record<string, TSESLint.FlatConfig.ConfigArray>,
   rules: {
     'require-alias-extension': requireAliasExtension,
+    'no-relative-imports': noRelativeImports,
   },
 } satisfies TSESLint.FlatConfig.Plugin
 

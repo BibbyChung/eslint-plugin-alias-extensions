@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `no-relative-imports` rule — detects relative imports (`./`, `../`) and autofixes them to the resolved alias path, automatically reading aliases from `package.json` `imports` and `tsconfig.json` `paths`. Covers `ImportDeclaration`, `ExportNamedDeclaration`, `ExportAllDeclaration`, and dynamic `import()` — replaces the unmaintained `eslint-plugin-no-relative-import-paths`, which is broken on ESLint 9+.
+- The rule is **opt-in** — it is not included in `configs.recommended` to avoid breaking changes for existing projects; enable it explicitly with `'alias-extensions/no-relative-imports': 'error'`.
+
 ## [0.2.2] - 2026-06-21
 
 ### Added
